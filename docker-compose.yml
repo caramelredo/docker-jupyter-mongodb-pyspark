@@ -30,32 +30,28 @@ services:
     command: jupyter lab --ip=0.0.0.0 --allow-root --no-browser
 
   spark-master:
-    image: bitnami/spark:latest
+    image: apache/spark:latest
     container_name: spark-master
     ports:
       - "8080:8080"
       - "7077:7077"
     environment:
       SPARK_MODE: master
-      SPARK_RPC_AUTHENTICATION_ENABLED: "no"
-      SPARK_RPC_ENCRYPTION_ENABLED: "no"
-      SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: "no"
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --host spark-master --port 7077
     networks:
       - spark-network
 
   spark-worker:
-    image: bitnami/spark:latest
+    image: apache/spark:latest
     container_name: spark-worker
     ports:
       - "8081:8081"
     environment:
-      SPARK_MODE: worker
-      SPARK_MASTER_URL: spark://spark-master:7077
+      SPARK_MASTER_HOST: spark-master
+      SPARK_MASTER_PORT: 7077
       SPARK_WORKER_MEMORY: 2G
       SPARK_WORKER_CORES: 2
-      SPARK_RPC_AUTHENTICATION_ENABLED: "no"
-      SPARK_RPC_ENCRYPTION_ENABLED: "no"
-      SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED: "no"
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
     depends_on:
       - spark-master
     networks:
