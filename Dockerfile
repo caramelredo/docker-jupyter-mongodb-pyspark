@@ -1,4 +1,4 @@
-FROM jupyter/pyspark-notebook:latest
+FROM jupyter/pyspark-notebook:spark-3.5.0
 
 USER root
 
@@ -6,8 +6,6 @@ USER root
 RUN pip install --no-cache-dir \
     pymongo==4.6.0 \
     requests==2.31.0 \
-    pandas==2.1.3 \
-    numpy==1.24.3
 
 # Switch back to jovyan user
 USER jovyan
