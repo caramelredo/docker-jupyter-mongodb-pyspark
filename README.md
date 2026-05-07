@@ -1,7 +1,7 @@
 # What to do:
 
 - download/pull repo into a folder
-- right click on folder and open terminal
+- right click on folder to open in terminal
 - enter "docker-compose up"
 - enter "docker compose logs jupyter | Select-String "token"" to get jupyter notebook link
 
