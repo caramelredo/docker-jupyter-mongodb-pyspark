@@ -1,11 +1,4 @@
-# Docker Compose: Jupyter + MongoDB + PySpark
-
-A complete Docker Compose setup for:
-- **Jupyter Lab** - Interactive notebook environment
-- **MongoDB** - NoSQL database
-- **Apache Spark** - Distributed data processing
-
-## What to do:
+# What to do:
 
 - download/pull repo into a folder
 - right click on folder and open terminal
