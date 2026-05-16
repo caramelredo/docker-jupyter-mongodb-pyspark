@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mongodb:
-    image: mongo:latest
+    image: mongo:7.0
     container_name: mongodb
     ports:
       - "27017:27017"
@@ -23,13 +23,14 @@ services:
       - "8888:8888"
     environment:
       JUPYTER_ENABLE_LAB: "yes"
+      JUPYTER_TOKEN: "bigdata"
     volumes:
       - ./notebooks:/home/jovyan/work
     depends_on:
       - mongodb
     networks:
       - spark-network
-    command: jupyter lab --ip=0.0.0.0 --allow-root --no-browser
+    command: jupyter lab --ip=0.0.0.0 --allow-root --no-browser --NotebookApp.token=bigdata
 
   spark-master:
     image: apache/spark:3.5.0
